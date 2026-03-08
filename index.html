@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>عالم الحيوانات - لعبة البطاقات</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Welcome Screen -->
+  <div id="welcome-screen" class="screen active">
+    <div class="welcome-content">
+      <div class="welcome-icon">🦁</div>
+      <h1>عالم الحيوانات</h1>
+      <p class="subtitle">هل تعرف الحيوان المفترس من الأليف؟</p>
+      <div class="welcome-buttons">
+        <button id="start-btn" class="big-btn bounce">ابدأ اللعب!</button>
+        <button id="browse-btn" class="big-btn secondary-btn">عرض جميع البطاقات</button>
+      </div>
+      <div class="welcome-animals">
+        <span>🐘</span><span>🐯</span><span>🐰</span><span>🦊</span><span>🐼</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game Screen -->
+  <div id="game-screen" class="screen">
+    <!-- Top Bar (card counter + home) -->
+    <div class="top-bar">
+      <button id="game-home-btn" class="icon-btn">🏠</button>
+      <div class="card-counter-wrapper">
+        <span id="card-counter" class="card-counter">1 / 30</span>
+      </div>
+      <button id="next-btn" class="icon-btn">⏭️</button>
+    </div>
+
+    <!-- Main Game Layout: buttons on sides, card in center -->
+    <div class="game-layout">
+      <button id="btn-predator" class="answer-btn predator-btn">
+        <span class="btn-icon">🦁</span>
+        <span class="btn-text">مفترس</span>
+      </button>
+
+      <div class="card-container">
+        <div id="animal-card" class="card">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="card-image-wrapper">
+                <img id="animal-image" src="" alt="">
+                <div id="loading-spinner" class="spinner"></div>
+              </div>
+              <h2 id="animal-name" class="animal-name"></h2>
+            </div>
+            <div class="card-back">
+              <div class="card-back-pattern">🐾</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button id="btn-friendly" class="answer-btn friendly-btn">
+        <span class="btn-icon">🐰</span>
+        <span class="btn-text">أليف</span>
+      </button>
+    </div>
+
+    <!-- Feedback Overlay -->
+    <div id="feedback" class="feedback hidden">
+      <div class="feedback-content">
+        <button id="feedback-close" class="feedback-close">✕</button>
+        <div id="feedback-icon" class="feedback-icon"></div>
+        <div id="feedback-text" class="feedback-text"></div>
+        <div id="feedback-reason" class="feedback-reason"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Browse All Cards Screen (Teacher View) -->
+  <div id="browse-screen" class="screen">
+    <div class="browse-top-bar">
+      <button id="browse-home-btn" class="icon-btn">🏠</button>
+      <h2 class="browse-title">جميع البطاقات</h2>
+      <div class="browse-filters">
+        <button class="filter-btn active" data-filter="all">الكل</button>
+        <button class="filter-btn" data-filter="predator">مفترس 🦁</button>
+        <button class="filter-btn" data-filter="friendly">أليف 🐰</button>
+      </div>
+    </div>
+    <div id="browse-grid" class="browse-grid"></div>
+  </div>
+
+  <!-- End Screen (no scores, just celebration) -->
+  <div id="end-screen" class="screen">
+    <div class="end-content">
+      <div class="end-icon">🎉</div>
+      <h2>أحسنتم! انتهت البطاقات</h2>
+      <p class="end-subtitle">شكراً لكم يا أبطال!</p>
+      <div class="end-buttons">
+        <button id="play-again-btn" class="big-btn bounce">العب مرة ثانية!</button>
+        <button id="home-btn" class="big-btn secondary-btn">الصفحة الرئيسية</button>
+      </div>
+      <div class="welcome-animals">
+        <span>🦁</span><span>🐘</span><span>🐯</span><span>🐰</span><span>🦊</span><span>🐼</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="js/animals.js"></script>
+  <script src="js/sounds.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
