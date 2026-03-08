@@ -1,9 +1,9 @@
 name: Deploy Game
 on:
   push:
-    branches: [main] # or master
+    branches: [main]
 permissions:
-  contents: write # This gives the action permission to push the deploy branch
+  contents: write
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -19,4 +19,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: . 
-          token: ${{ secrets.GITHUB_TOKEN }} # Uses the built-in token
+          token: ${{ secrets.GITHUB_TOKEN }}
