@@ -16,10 +16,7 @@
       <div class="welcome-icon">🦁</div>
       <h1>عالم الحيوانات</h1>
       <p class="subtitle">هل تعرف الحيوان المفترس من الأليف؟</p>
-      <div class="welcome-buttons">
-        <button id="start-btn" class="big-btn bounce">ابدأ اللعب!</button>
-        <button id="browse-btn" class="big-btn secondary-btn">عرض جميع البطاقات</button>
-      </div>
+      <button id="start-btn" class="big-btn bounce">ابدأ اللعب!</button>
       <div class="welcome-animals">
         <span>🐘</span><span>🐯</span><span>🐰</span><span>🦊</span><span>🐼</span>
       </div>
@@ -28,39 +25,43 @@
 
   <!-- Game Screen -->
   <div id="game-screen" class="screen">
-    <!-- Top Bar (card counter + home) -->
-    <div class="top-bar">
-      <button id="game-home-btn" class="icon-btn">🏠</button>
-      <div class="card-counter-wrapper">
-        <span id="card-counter" class="card-counter">1 / 30</span>
+    <!-- Score Bar -->
+    <div class="score-bar">
+      <div class="score-item">
+        <span class="score-label">النتيجة</span>
+        <span id="score" class="score-value">0</span>
       </div>
-      <button id="next-btn" class="icon-btn">⏭️</button>
+      <div class="score-item">
+        <span class="score-label">البطاقة</span>
+        <span id="card-counter" class="score-value">1/10</span>
+      </div>
+      <div class="score-item stars" id="stars-container"></div>
     </div>
 
-    <!-- Main Game Layout: buttons on sides, card in center -->
-    <div class="game-layout">
+    <!-- Card Area -->
+    <div class="card-container">
+      <div id="animal-card" class="card">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="card-image-wrapper">
+              <img id="animal-image" src="" alt="">
+              <div id="loading-spinner" class="spinner"></div>
+            </div>
+            <h2 id="animal-name" class="animal-name"></h2>
+          </div>
+          <div class="card-back">
+            <div class="card-back-pattern">🐾</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Answer Buttons -->
+    <div class="answer-buttons">
       <button id="btn-predator" class="answer-btn predator-btn">
         <span class="btn-icon">🦁</span>
         <span class="btn-text">مفترس</span>
       </button>
-
-      <div class="card-container">
-        <div id="animal-card" class="card">
-          <div class="card-inner">
-            <div class="card-front">
-              <div class="card-image-wrapper">
-                <img id="animal-image" src="" alt="">
-                <div id="loading-spinner" class="spinner"></div>
-              </div>
-              <h2 id="animal-name" class="animal-name"></h2>
-            </div>
-            <div class="card-back">
-              <div class="card-back-pattern">🐾</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <button id="btn-friendly" class="answer-btn friendly-btn">
         <span class="btn-icon">🐰</span>
         <span class="btn-text">أليف</span>
@@ -70,7 +71,6 @@
     <!-- Feedback Overlay -->
     <div id="feedback" class="feedback hidden">
       <div class="feedback-content">
-        <button id="feedback-close" class="feedback-close">✕</button>
         <div id="feedback-icon" class="feedback-icon"></div>
         <div id="feedback-text" class="feedback-text"></div>
         <div id="feedback-reason" class="feedback-reason"></div>
@@ -78,33 +78,15 @@
     </div>
   </div>
 
-  <!-- Browse All Cards Screen (Teacher View) -->
-  <div id="browse-screen" class="screen">
-    <div class="browse-top-bar">
-      <button id="browse-home-btn" class="icon-btn">🏠</button>
-      <h2 class="browse-title">جميع البطاقات</h2>
-      <div class="browse-filters">
-        <button class="filter-btn active" data-filter="all">الكل</button>
-        <button class="filter-btn" data-filter="predator">مفترس 🦁</button>
-        <button class="filter-btn" data-filter="friendly">أليف 🐰</button>
-      </div>
-    </div>
-    <div id="browse-grid" class="browse-grid"></div>
-  </div>
-
-  <!-- End Screen (no scores, just celebration) -->
-  <div id="end-screen" class="screen">
-    <div class="end-content">
-      <div class="end-icon">🎉</div>
-      <h2>أحسنتم! انتهت البطاقات</h2>
-      <p class="end-subtitle">شكراً لكم يا أبطال!</p>
-      <div class="end-buttons">
-        <button id="play-again-btn" class="big-btn bounce">العب مرة ثانية!</button>
-        <button id="home-btn" class="big-btn secondary-btn">الصفحة الرئيسية</button>
-      </div>
-      <div class="welcome-animals">
-        <span>🦁</span><span>🐘</span><span>🐯</span><span>🐰</span><span>🦊</span><span>🐼</span>
-      </div>
+  <!-- Results Screen -->
+  <div id="results-screen" class="screen">
+    <div class="results-content">
+      <div id="results-icon" class="results-icon"></div>
+      <h2 id="results-title"></h2>
+      <div id="results-score" class="results-score"></div>
+      <div id="results-stars" class="results-stars"></div>
+      <button id="play-again-btn" class="big-btn bounce">العب مرة ثانية!</button>
+      <button id="home-btn" class="big-btn secondary-btn">الصفحة الرئيسية</button>
     </div>
   </div>
 
