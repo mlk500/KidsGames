@@ -8,14 +8,15 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout 🛎️
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Create Config File 🛠️
+      - name: Create Config File
         run: |
           echo "const PIXABAY_API_KEY = '${{ secrets.MY_PIXABAY_KEY }}';" > config.js
+          rm -f .gitignore
 
-      - name: Deploy 🚀
+      - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: .
