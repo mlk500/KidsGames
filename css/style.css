@@ -36,6 +36,14 @@ body {
   background: linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #ffd900 100%);
 }
 
+#animal-menu-screen {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #ffd900 100%);
+}
+
+#fruit-menu-screen {
+  background: linear-gradient(135deg, #a8e063 0%, #56ab2f 50%, #ffd900 100%);
+}
+
 .welcome-content {
   text-align: center;
   padding: 20px;
@@ -66,6 +74,56 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 12px;
+}
+
+/* ===== Game Selection Hub ===== */
+.game-selection {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.game-card-btn {
+  background: rgba(255,255,255,0.95);
+  border: none;
+  border-radius: 30px;
+  padding: 35px 40px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+  min-width: 260px;
+  font-family: 'Cairo', sans-serif;
+}
+
+.game-card-btn:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+.game-card-btn:active {
+  transform: scale(0.97);
+}
+
+.game-card-icon {
+  font-size: 80px;
+}
+
+.game-card-title {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #333;
+}
+
+.game-card-desc {
+  font-size: 1.2rem;
+  color: #888;
+  font-weight: 700;
 }
 
 .welcome-animals {
@@ -239,7 +297,8 @@ body {
   position: relative;
 }
 
-#animal-image {
+#animal-image,
+#fruit-image {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
@@ -317,6 +376,25 @@ body {
 .friendly-btn {
   background: linear-gradient(135deg, #51cf66, #20bf6b);
   color: #fff;
+}
+
+.fruit-btn {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+  color: #fff;
+}
+
+.vegetable-btn {
+  background: linear-gradient(135deg, #51cf66, #20bf6b);
+  color: #fff;
+}
+
+/* ===== Fruit Card Variants ===== */
+.fruit-image-bg {
+  background: linear-gradient(135deg, #fff9c4, #c8e6c9) !important;
+}
+
+.fruit-card-back {
+  background: linear-gradient(135deg, #a8e063, #56ab2f) !important;
 }
 
 /* ===== Feedback ===== */
@@ -514,9 +592,154 @@ body {
   margin-top: 6px;
 }
 
+.browse-card-tag.fruit-tag {
+  background: #ffe0e0;
+  color: #ee5a24;
+}
+
+.browse-card-tag.vegetable-tag {
+  background: #d4f5dc;
+  color: #20bf6b;
+}
+
+/* ===== Learn Screen (Pre-game) ===== */
+#fruit-learn-screen.active {
+  display: block;
+  overflow-y: auto;
+}
+
+.learn-top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  padding: 12px 30px;
+  gap: 20px;
+  z-index: 10;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border-radius: 0 0 20px 20px;
+}
+
+.learn-start-btn {
+  background: linear-gradient(135deg, #51cf66, #20bf6b);
+  color: #fff;
+  border: none;
+  padding: 12px 35px;
+  font-size: 1.4rem;
+  font-weight: 900;
+  font-family: 'Cairo', sans-serif;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(32,191,107,0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-right: auto;
+  white-space: nowrap;
+}
+
+.learn-start-btn:hover {
+  transform: scale(1.05);
+}
+
+.learn-start-btn:active {
+  transform: scale(0.95);
+}
+
+.learn-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 100px 30px 30px;
+}
+
+.learn-card {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+  border: 4px solid #a8e063;
+  transition: transform 0.2s;
+  animation: slideUp 0.5s ease-out both;
+}
+
+.learn-card:nth-child(n) {
+  animation-delay: calc(var(--i, 0) * 0.05s);
+}
+
+.learn-card:hover {
+  transform: scale(1.05);
+}
+
+.learn-card-img {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+  background: linear-gradient(135deg, #fff9c4, #c8e6c9);
+}
+
+.learn-card-body {
+  padding: 10px 12px;
+  text-align: center;
+}
+
+.learn-card-name {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #333;
+}
+
+.learn-card-tag {
+  display: inline-block;
+  padding: 3px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.learn-card-tag.fruit-tag {
+  background: #ffe0e0;
+  color: #ee5a24;
+}
+
+.learn-card-tag.vegetable-tag {
+  background: #d4f5dc;
+  color: #20bf6b;
+}
+
+#fruit-browse-screen.active {
+  display: block;
+  overflow-y: auto;
+}
+
+.fruit-filter-btn {
+  padding: 8px 20px;
+  border: 2px solid #56ab2f;
+  background: #fff;
+  color: #56ab2f;
+  font-family: 'Cairo', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.fruit-filter-btn.active {
+  background: #56ab2f;
+  color: #fff;
+}
+
 /* ===== End Screen ===== */
 #end-screen {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+#fruit-end-screen {
+  background: linear-gradient(135deg, #a8e063 0%, #56ab2f 100%);
 }
 
 .end-content {
@@ -666,6 +889,21 @@ body {
   .subtitle { font-size: 1.2rem; }
   .big-btn { padding: 16px 40px; font-size: 1.4rem; }
   .welcome-animals { font-size: 36px; }
+
+  .game-selection { gap: 15px; }
+  .game-card-btn { min-width: 200px; padding: 25px 30px; }
+  .game-card-icon { font-size: 55px; }
+  .game-card-title { font-size: 1.5rem; }
+  .game-card-desc { font-size: 1rem; }
+
+  .learn-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+    padding: 90px 15px 15px;
+  }
+  .learn-card-img { height: 110px; }
+  .learn-card-name { font-size: 1.1rem; }
+  .learn-start-btn { font-size: 1.1rem; padding: 10px 25px; }
 
   .card {
     width: 250px;
