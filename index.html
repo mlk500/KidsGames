@@ -3,15 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>عالم الحيوانات - لعبة البطاقات</title>
+  <title>منصة الألعاب التعليمية</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- Welcome Screen -->
+  <!-- Welcome Screen - Game Selection Hub -->
   <div id="welcome-screen" class="screen active">
+    <div class="welcome-content">
+      <div class="welcome-icon">🎮</div>
+      <h1>منصة الألعاب التعليمية</h1>
+      <p class="subtitle">اختر اللعبة التي تريد أن تلعبها!</p>
+      <div class="game-selection">
+        <button id="animal-game-btn" class="game-card-btn">
+          <span class="game-card-icon">🦁</span>
+          <span class="game-card-title">عالم الحيوانات</span>
+          <span class="game-card-desc">هل تعرف المفترس من الأليف؟</span>
+        </button>
+        <button id="fruit-game-btn" class="game-card-btn">
+          <span class="game-card-icon">🍎</span>
+          <span class="game-card-title">فواكه وخضروات</span>
+          <span class="game-card-desc">هل تعرف الفاكهة من الخضار؟</span>
+        </button>
+      </div>
+      <div class="welcome-animals">
+        <span>🐘</span><span>🍊</span><span>🐯</span><span>🥦</span><span>🐰</span><span>🍇</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ANIMAL GAME SCREENS ===== -->
+
+  <!-- Animal Game - Sub Menu -->
+  <div id="animal-menu-screen" class="screen">
     <div class="welcome-content">
       <div class="welcome-icon">🦁</div>
       <h1>عالم الحيوانات</h1>
@@ -19,6 +45,7 @@
       <div class="welcome-buttons">
         <button id="start-btn" class="big-btn bounce">ابدأ اللعب!</button>
         <button id="browse-btn" class="big-btn secondary-btn">عرض جميع البطاقات</button>
+        <button id="animal-back-btn" class="big-btn secondary-btn">الرجوع للقائمة</button>
       </div>
       <div class="welcome-animals">
         <span>🐘</span><span>🐯</span><span>🐰</span><span>🦊</span><span>🐼</span>
@@ -26,9 +53,8 @@
     </div>
   </div>
 
-  <!-- Game Screen -->
+  <!-- Animal Game Screen -->
   <div id="game-screen" class="screen">
-    <!-- Top Bar (card counter + home) -->
     <div class="top-bar">
       <button id="game-home-btn" class="icon-btn">🏠</button>
       <div class="card-counter-wrapper">
@@ -37,7 +63,6 @@
       <button id="next-btn" class="icon-btn">⏭️</button>
     </div>
 
-    <!-- Main Game Layout: buttons on sides, card in center -->
     <div class="game-layout">
       <button id="btn-predator" class="answer-btn predator-btn">
         <span class="btn-icon">🦁</span>
@@ -67,7 +92,6 @@
       </button>
     </div>
 
-    <!-- Feedback Overlay -->
     <div id="feedback" class="feedback hidden">
       <div class="feedback-content">
         <button id="feedback-close" class="feedback-close">✕</button>
@@ -78,9 +102,10 @@
     </div>
   </div>
 
-  <!-- Browse All Cards Screen (Teacher View) -->
+  <!-- Animal Browse Screen -->
   <div id="browse-screen" class="screen">
     <div class="browse-top-bar">
+      <button id="browse-back-btn" class="icon-btn">↩️</button>
       <button id="browse-home-btn" class="icon-btn">🏠</button>
       <h2 class="browse-title">جميع البطاقات</h2>
       <div class="browse-filters">
@@ -92,7 +117,7 @@
     <div id="browse-grid" class="browse-grid"></div>
   </div>
 
-  <!-- End Screen (no scores, just celebration) -->
+  <!-- Animal End Screen -->
   <div id="end-screen" class="screen">
     <div class="end-content">
       <div class="end-icon">🎉</div>
@@ -108,9 +133,120 @@
     </div>
   </div>
 
+  <!-- ===== FRUIT/VEGETABLE GAME SCREENS ===== -->
+
+  <!-- Fruit Game - Sub Menu (not needed, goes to learn screen) -->
+  <div id="fruit-menu-screen" class="screen">
+    <div class="welcome-content">
+      <div class="welcome-icon">🍎</div>
+      <h1>فواكه وخضروات</h1>
+      <p class="subtitle">هل تعرف الفاكهة من الخضار؟</p>
+      <div class="welcome-buttons">
+        <button id="fruit-start-btn" class="big-btn bounce">ابدأ اللعب!</button>
+        <button id="fruit-browse-btn" class="big-btn secondary-btn">عرض جميع البطاقات</button>
+        <button id="fruit-back-btn" class="big-btn secondary-btn">الرجوع للقائمة</button>
+      </div>
+      <div class="welcome-animals">
+        <span>🍎</span><span>🥕</span><span>🍇</span><span>🥦</span><span>🍌</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fruit Learn Screen (shows all items before game) -->
+  <div id="fruit-learn-screen" class="screen">
+    <div class="learn-top-bar">
+      <button id="fruit-learn-home-btn" class="icon-btn">🏠</button>
+      <h2 class="browse-title">تعرّف على الفواكه والخضروات!</h2>
+      <button id="fruit-learn-start-btn" class="learn-start-btn bounce">يلا نلعب! 🎮</button>
+    </div>
+    <div id="fruit-learn-grid" class="learn-grid"></div>
+  </div>
+
+  <!-- Fruit Game Screen -->
+  <div id="fruit-game-screen" class="screen">
+    <div class="top-bar">
+      <button id="fruit-game-home-btn" class="icon-btn">🏠</button>
+      <div class="card-counter-wrapper">
+        <span id="fruit-card-counter" class="card-counter">1 / 36</span>
+      </div>
+      <button id="fruit-next-btn" class="icon-btn">⏭️</button>
+    </div>
+
+    <div class="game-layout">
+      <button id="btn-fruit" class="answer-btn fruit-btn">
+        <span class="btn-icon">🍎</span>
+        <span class="btn-text">فاكهة</span>
+      </button>
+
+      <div class="card-container">
+        <div id="fruit-card" class="card">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="card-image-wrapper fruit-image-bg">
+                <img id="fruit-image" src="" alt="">
+                <div id="fruit-loading-spinner" class="spinner"></div>
+              </div>
+              <h2 id="fruit-name" class="animal-name"></h2>
+            </div>
+            <div class="card-back fruit-card-back">
+              <div class="card-back-pattern">🍎</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button id="btn-vegetable" class="answer-btn vegetable-btn">
+        <span class="btn-icon">🥦</span>
+        <span class="btn-text">خضار</span>
+      </button>
+    </div>
+
+    <div id="fruit-feedback" class="feedback hidden">
+      <div class="feedback-content">
+        <button id="fruit-feedback-close" class="feedback-close">✕</button>
+        <div id="fruit-feedback-icon" class="feedback-icon"></div>
+        <div id="fruit-feedback-text" class="feedback-text"></div>
+        <div id="fruit-feedback-reason" class="feedback-reason"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fruit Browse Screen -->
+  <div id="fruit-browse-screen" class="screen">
+    <div class="browse-top-bar">
+      <button id="fruit-browse-back-btn" class="icon-btn">↩️</button>
+      <button id="fruit-browse-home-btn" class="icon-btn">🏠</button>
+      <h2 class="browse-title">جميع الفواكه والخضروات</h2>
+      <div class="browse-filters">
+        <button class="fruit-filter-btn active" data-filter="all">الكل</button>
+        <button class="fruit-filter-btn" data-filter="fruit">فاكهة 🍎</button>
+        <button class="fruit-filter-btn" data-filter="vegetable">خضار 🥦</button>
+      </div>
+    </div>
+    <div id="fruit-browse-grid" class="browse-grid"></div>
+  </div>
+
+  <!-- Fruit End Screen -->
+  <div id="fruit-end-screen" class="screen">
+    <div class="end-content">
+      <div class="end-icon">🎉</div>
+      <h2>أحسنتم! انتهت البطاقات</h2>
+      <p class="end-subtitle">شكراً لكم يا أبطال!</p>
+      <div class="end-buttons">
+        <button id="fruit-play-again-btn" class="big-btn bounce">العب مرة ثانية!</button>
+        <button id="fruit-home-btn" class="big-btn secondary-btn">الصفحة الرئيسية</button>
+      </div>
+      <div class="welcome-animals">
+        <span>🍎</span><span>🥕</span><span>🍇</span><span>🥦</span><span>🍌</span><span>🍊</span>
+      </div>
+    </div>
+  </div>
+
 <script src="config.js"></script>
 <script src="./js/animals.js"></script>
+<script src="./js/fruits-vegetables.js"></script>
 <script src="./js/sounds.js"></script>
 <script src="./js/game.js"></script>
+<script src="./js/fruit-game.js"></script>
 </body>
 </html>

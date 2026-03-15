@@ -9,11 +9,15 @@ const Game = {
   init() {
     this.el = {
       welcomeScreen: document.getElementById('welcome-screen'),
+      animalMenuScreen: document.getElementById('animal-menu-screen'),
       gameScreen: document.getElementById('game-screen'),
       browseScreen: document.getElementById('browse-screen'),
       endScreen: document.getElementById('end-screen'),
+      animalGameBtn: document.getElementById('animal-game-btn'),
+      fruitGameBtn: document.getElementById('fruit-game-btn'),
       startBtn: document.getElementById('start-btn'),
       browseBtn: document.getElementById('browse-btn'),
+      animalBackBtn: document.getElementById('animal-back-btn'),
       animalCard: document.getElementById('animal-card'),
       animalImage: document.getElementById('animal-image'),
       animalName: document.getElementById('animal-name'),
@@ -29,18 +33,33 @@ const Game = {
       nextBtn: document.getElementById('next-btn'),
       browseGrid: document.getElementById('browse-grid'),
       feedbackClose: document.getElementById('feedback-close'),
+      browseBackBtn: document.getElementById('browse-back-btn'),
       browseHomeBtn: document.getElementById('browse-home-btn'),
       playAgainBtn: document.getElementById('play-again-btn'),
       homeBtn: document.getElementById('home-btn'),
     };
 
+    // Welcome hub buttons
+    this.el.animalGameBtn.addEventListener('click', () => this.showScreen('animal-menu'));
+    this.el.fruitGameBtn.addEventListener('click', () => {
+      SoundEffects.click();
+      const allScreens = document.querySelectorAll('.screen');
+      allScreens.forEach(s => s.classList.remove('active'));
+      document.getElementById('fruit-menu-screen').classList.add('active');
+    });
+
+    // Animal menu buttons
     this.el.startBtn.addEventListener('click', () => this.startGame());
     this.el.browseBtn.addEventListener('click', () => this.showBrowse());
+    this.el.animalBackBtn.addEventListener('click', () => this.showScreen('welcome'));
+
+    // Game buttons
     this.el.btnPredator.addEventListener('click', () => this.answer(true));
     this.el.btnFriendly.addEventListener('click', () => this.answer(false));
     this.el.gameHomeBtn.addEventListener('click', () => this.showScreen('welcome'));
     this.el.nextBtn.addEventListener('click', () => this.skipCard());
     this.el.feedbackClose.addEventListener('click', () => this.dismissFeedback());
+    this.el.browseBackBtn.addEventListener('click', () => this.showScreen('animal-menu'));
     this.el.browseHomeBtn.addEventListener('click', () => this.showScreen('welcome'));
     this.el.playAgainBtn.addEventListener('click', () => this.startGame());
     this.el.homeBtn.addEventListener('click', () => this.showScreen('welcome'));
@@ -57,10 +76,16 @@ const Game = {
 
   showScreen(name) {
     SoundEffects.click();
-    const screens = [this.el.welcomeScreen, this.el.gameScreen, this.el.browseScreen, this.el.endScreen];
-    screens.forEach(s => s.classList.remove('active'));
+    const allScreens = document.querySelectorAll('.screen');
+    allScreens.forEach(s => s.classList.remove('active'));
 
-    const map = { welcome: this.el.welcomeScreen, game: this.el.gameScreen, browse: this.el.browseScreen, end: this.el.endScreen };
+    const map = {
+      welcome: this.el.welcomeScreen,
+      'animal-menu': this.el.animalMenuScreen,
+      game: this.el.gameScreen,
+      browse: this.el.browseScreen,
+      end: this.el.endScreen
+    };
     if (map[name]) map[name].classList.add('active');
   },
 
@@ -93,12 +118,10 @@ const Game = {
   async fetchImage(searchTerm) {
     if (this.imageCache[searchTerm]) return this.imageCache[searchTerm];
 
-    // Try illustration first (cartoon style)
     try {
       const url = `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&q=${encodeURIComponent(searchTerm)}&image_type=illustration&safesearch=true&per_page=10`;
       const response = await fetch(url);
       const data = await response.json();
-
       if (data.hits && data.hits.length > 0) {
         const imageUrl = data.hits[0].webformatURL;
         this.imageCache[searchTerm] = imageUrl;
@@ -108,12 +131,10 @@ const Game = {
       console.warn('Image fetch failed for:', searchTerm, e);
     }
 
-    // Fallback: vector
     try {
       const url = `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&q=${encodeURIComponent(searchTerm)}&image_type=vector&safesearch=true&per_page=10`;
       const response = await fetch(url);
       const data = await response.json();
-
       if (data.hits && data.hits.length > 0) {
         const imageUrl = data.hits[0].webformatURL;
         this.imageCache[searchTerm] = imageUrl;
@@ -123,12 +144,10 @@ const Game = {
       console.warn('Vector image fetch failed for:', searchTerm, e);
     }
 
-    // Last fallback: photo
     try {
       const url = `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&q=${encodeURIComponent(searchTerm)}&image_type=photo&safesearch=true&per_page=5&category=animals`;
       const response = await fetch(url);
       const data = await response.json();
-
       if (data.hits && data.hits.length > 0) {
         const imageUrl = data.hits[0].webformatURL;
         this.imageCache[searchTerm] = imageUrl;
@@ -175,7 +194,6 @@ const Game = {
       this.el.loadingSpinner.classList.remove('active');
     }
 
-    // Preload next image
     if (this.currentIndex + 1 < this.currentAnimals.length) {
       this.fetchImage(this.currentAnimals[this.currentIndex + 1].searchTerm);
     }
@@ -222,6 +240,7 @@ const Game = {
     const typeText = animal.isPredator ? 'حيوان مفترس 🦁' : 'حيوان أليف 🐰';
     this.el.feedbackReason.innerHTML = `<strong>${animal.name}</strong> - ${typeText}<br>${animal.reason}`;
   },
+
   playVoice(name) {
     if (this.currentAudio) {
       this.currentAudio.pause();
@@ -248,7 +267,6 @@ const Game = {
     this.showScreen('end');
   },
 
-  // === Browse (Teacher View) ===
   async showBrowse() {
     this.showScreen('browse');
     this.renderBrowseCards('all');
@@ -282,7 +300,6 @@ const Game = {
 
       this.el.browseGrid.appendChild(card);
 
-      // Load image async
       this.fetchImage(animal.searchTerm).then(url => {
         if (url) {
           card.querySelector('.browse-card-img').src = url;
