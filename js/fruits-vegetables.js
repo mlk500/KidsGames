@@ -81,7 +81,7 @@ const fruitsVegetables = [
     info: "فاكهة ناعمة وحلوة"
   },
   {
-    name: "كمثرى",
+    name: "إجاص",
     englishName: "pear",
     searchTerm: "pear green fruit illustration",
     type: "فاكهة",
@@ -128,14 +128,14 @@ const fruitsVegetables = [
     isFruit: true,
     info: "فاكهة خضراء من الداخل بنية من الخارج"
   },
-  {
-    name: "تمر",
-    englishName: "dates",
-    searchTerm: "date fruit brown",
-    type: "فاكهة",
-    isFruit: true,
-    info: "فاكهة حلوة من النخل"
-  },
+  // {
+  //   name: "تمر",
+  //   englishName: "dates",
+  //   searchTerm: "date fruit brown",
+  //   type: "فاكهة",
+  //   isFruit: true,
+  //   info: "فاكهة حلوة من النخل"
+  // },
   {
     name: "جوز هند",
     englishName: "coconut",
